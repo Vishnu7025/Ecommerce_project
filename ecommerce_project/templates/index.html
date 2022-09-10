@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SKgadgets {% endblock %}
+
+
+{% block content %} 
+
+<style>
+
+.about {
+     background-color: #fff;
+     padding: 90px 0;
+}
+
+.about .titlepage {
+     text-align: left;
+}
+
+.about .titlepage h2 {
+     max-width: inherit;
+     border: inherit;
+}
+
+.about .titlepage p {
+     padding: 30px 0;
+}
+
+.about_img figure {
+     margin: 0;
+}
+
+.about_img figure img {
+     width: 100%;
+}
+
+
+.read_more {
+     font-size: 17px;
+     background-color: #48ca95;
+     color: #fff !important;
+     padding: 13px 0px;
+     width: 100%;
+     max-width: 190px;
+     text-align: center;
+     display: inline-block;
+     transition: ease-in all 0.5s;
+     font-weight: 500;
+}
+
+.read_more:hover {
+     background: #000;
+     color: #fff;
+     transition: ease-in all 0.5s;
+}
+.three_box {
+     background-color: #fff;
+     padding-top: 90px;
+}
+
+.box_text {
+     background: #fff;
+     text-align: center;
+     padding: 50px 20px 20px 20px;
+     border: #48ca95 solid 1px;
+     border-radius: 15px;
+}
+
+.box_text h3 {
+     color: #121010;
+     font-size: 20px;
+     line-height: 22px;
+     font-weight: bold;
+     padding-bottom: 25px;
+}
+
+.box_text p {
+     font-size: 17px;
+     color: #050505;
+     line-height: 30px;
+}
+
+.box_text i {
+     padding-bottom: 25px;
+     display: block;
+}
+.laptop {
+     font-family: 'Dosis', sans-serif;
+     padding: 130px 0;
+     background-color: #4f4aa6;
+}
+
+.laptop .titlepage {
+     text-align: left;
+     padding-bottom: 0;
+}
+
+.laptop .titlepage p {
+     color: #fff;
+     display: block;
+     font-size: 40px;
+     font-weight: normal;
+     padding-bottom: 24px;
+     line-height: 40px;
+}
+
+.laptop .titlepage h2 {
+     text-transform: none;
+     font-size: 80px;
+     color: #fff;
+     max-width: inherit;
+     border: inherit;
+     font-weight: 500;
+     line-height: 80px;
+}
+
+.laptop_box {
+     margin-right: -50px;
+}
+
+.laptop_box figure {
+     margin: 0;
+}
+
+.margin_bottom {
+     margin-bottom: 30px;
+}
+
+.laptop .read_more {
+     display: block;
+     margin-top: 60px;
+
+
+}
+
+
+
+</style>
+
+            <!-- carousel starts----------------------------- -->
+
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+            <img " src=" {% static '/images/sfk.jpg/' %}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h1 style="color:rgb(255, 242, 242);">Your favorite gadgets</h1>
+                <p>Free delivery for prime members.</p>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <a href="{% url 'store' %}" class="btn">Buy Now</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img src="{% static '/images/iph3.jpg/' %}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h1 style="color:white;">your favourite Mobile brands</h1>
+                <p>Some representative placeholder content for the second slide.</p>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <a href="{% url 'store' %}" class="btn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static '/images/lap.jpg/' %}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h1 style="color:rgb(55, 51, 51);">Your favorite laptops</h1>
+                <p>Some representative placeholder content for the second slide.</p>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <a href="{% url 'store' %}" class="btn" >Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+                    <!-- carousel ends------------- -->
+
+
+
+                <div class="card text-center">
+                    <div class="card-body">
+                        <div class="three_box">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="box_text">
+                                            <a href="{% url 'store' %}"><i style="font-size: 100px;" class="fa fa-laptop" aria-hidden="true"></i></a>
+                                            <h3>Laptop</h3>
+                                            <p>we have the best collections of laptops which are budjet friendly and in best offers ,we are provideing two brands DELL and HP. </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="box_text">
+                                                 <a href="{% url 'store' %}"><i style="font-size: 100px;"  class="fa fa-tablet" aria-hidden="true"></i></a>
+
+                                            <h3>Tablet</h3>
+                                            <p>we have the best collections of tablets which are budjet friendly and in best offers ,we are provideing two brands Samsung
+                                            and Lenova. </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="box_text">
+                                             <a href="{% url 'store' %}"><i style="font-size: 100px;"  class="fa fa-headphones" aria-hidden="true"></i></a>
+                                            <h3>Head phone</h3>
+                                            <p>we have the best collections of Headphones which are budjet friendly and in best offers ,we are provideing two brands Jbl
+                                            and Boat. </p>
+                                        </div>
+                                    </div>
+                        
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                           <a href="{% url 'store' %}" class="btn btn-primary" type="button">Vist Store</a>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                    </div>
+                </div>
+
+            
+
+    <div class="laptop">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="titlepage">
+                        <p>Every Computer and laptop</p>
+                        <h2>Up to 40% off !</h2>
+                        <a  class="read_more" href="{% url 'store' %}">Shop Now</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="laptop_box">
+                        <figure><img src="{% static '/images/pc.png/' %}" alt="#" /></figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+        <div class="about">
+            <div class="container">
+                <div class="row d_flex">
+                    <div class="col-md-5">
+                        <div class="titlepage">
+                            <h2>About Us</h2>
+                            <p>SK gadgets was established in the year 2003 and inaugurated by the then Chief Minister of Kerala Shri. A K Antony who
+                            later went on to become the Defence Minister of India. </p>
+                            <a class="read_more" href="{% url 'store' %}">visit store</a>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="about_img">
+                            <figure><img src="{% static '/images/about.jpg/' %}" alt="#" /></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+{% endblock %}

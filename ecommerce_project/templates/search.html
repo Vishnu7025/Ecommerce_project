@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Our store{% endblock %}
+{% block content %}
+
+<nav class="navbar navbar-expand-lg bg-info ">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'store' %}"><i class="fa fa-bars" aria-hidden="true"></i>ALL</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"></a>
+                </li>
+                <form class="d-flex" role="search" action="{% url 'search' %}">
+                    <input class="form-control me-2"placeholder="Search products"   name="keyword">
+                    <button class="btn btn-outline-light bg-secondary" type="submit">Search</button>
+                </form>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="container d-flex justify-content-center mt-50 mb-50">
+    <div class="row">
+
+    {% if product %}
+
+           {% for i in product %}
+               
+                <div class="col-md-4 mt-2">
+                    <div class="card border-primary">
+                        <div class="card-body ">
+                            <div class="card-img-actions ">
+                
+                                <a href="{{ i.get_url }}"><img style="height: 250px; width:250px;" src="{{i.img.url}}"
+                                        class="card-img img-fluid" width="96" height="350" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="card-body bg-light text-center">
+                            <div class="mb-2">
+                                <h6 class="font-weight-semibold mb-2">
+                                    <a href="{{ i.get_url }}" class="text-default mb-2"
+                                        data-abc="true">{{i.name}}-{{i.desc|truncatechars:35}}</a>
+                                </h6>
+                            </div>
+                            <div class="">
+                                <i style=" color: orange;" class="fa fa-star"></i>
+                                <i style=" color: orange;" class="fa fa-star"></i>
+                                <i style=" color: orange;" class="fa fa-star"></i>
+                                <i style=" color: orange;" class="fa fa-star"></i>
+                                <i style=" color: orange;" class="fa fa-star-half-o"></i>
+                                <a href="{{i.get_url}}"><span>( 250 reviews )</span></a>
+                            </div>
+                
+                            <h3 class="mb-0 font-weight-semibold">₹{{i.price}}**</h3>
+                            <a href="{{i.get_url}}" class="text-muted" data-abc="true">Flat INR 1000 Off on ICICI CreditCards</a>
+                
+                        </div>
+                    </div>
+                </div>
+                
+            {% endfor %}
+
+            
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            No result found!
+        </div>
+    {% endif %}
+    </div>
+</div>
+
+
+
+{% endblock %}
