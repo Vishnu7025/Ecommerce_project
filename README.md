@@ -18,4 +18,4 @@ I’m a Python | Django developer based in Trivandrum, Kerala, curious to learn 
 - Technologies used: Python 3, Django, PostgreSQL, HTML, CSS,   JavaScript, Bootstrap5.
 
 ## Screenshots
-
+![Screenshot (30)](https://user-images.githubusercontent.com/105106551/190904733-3198cc25-3b7f-438a-a989-9413fa94edb7.png)
