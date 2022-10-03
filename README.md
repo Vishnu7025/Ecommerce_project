@@ -5,7 +5,7 @@ SK_gadgets is feature rich e-commerce website for gadgets, which is completely r
 
 
 ## 🚀 About Me
-I’m a Python | Django developer based in Trivandrum, Kerala, curious to learn more about developing scalable distributed systems, loves problem solving and cares about writing readable as well as maintainable code.
+I’m a Python developer, curious to learn more about developing systems, loves problem solving and cares about writing readable as well as maintainable code, with passion to learn new things, seeking an opportunity to work with a reputable firm to utilize my skills and knowledge for the development of the firm as well as myself.
 
 
 ## Features
