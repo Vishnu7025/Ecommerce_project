@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}product view{% endblock %}
+{% block content %}
+
+<style>
+    .rating{
+	border: none;
+	float: left;
+}
+
+.rating > input{
+	display: none;
+}
+
+.rating > label:before{
+	content: '\f005';
+	font-family: FontAwesome;
+	margin: 5px;
+	font-size: 1.5rem;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.rating > .half:before{
+	content: '\f089';
+	position: absolute;
+	cursor: pointer;
+}
+
+
+.rating > label{
+	color: #ddd;
+	float: right;
+	cursor: pointer;
+}
+
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover, 
+.rating:not(:checked) > label:hover ~ label{
+	color: #2ce679;
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label{
+	color: #2ddc76;
+}
+</style>
+
+
+<div class="main-wrapper">
+    <div class="container">
+        <div class="product-div">
+            <div class="product-div-left"> 
+                    <img class="smg" src="{{single_product.img.url}}" data-zoom-image="{{single_product.img.url}}" id="zoom">
+                 <div class="hover-container">
+                    <div><img class="smg" src="{{single_product.img.url}}"></div>
+                    <div><img class="smg" src="{{single_product.img.url}}"></div>
+                    <div><img class="smg"src="{{single_product.img.url}}"></div>
+                    <div><img class="smg"src="{{single_product.img.url}}"></div>
+                    <div><img class="smg"src="{{single_product.img.url}}"></div>
+                </div>
+            </div>
+            <div class="product-div-right">
+                <span class="product-name"><b>{{single_product.name}}</b>{{single_product.desc|truncatechars:100}}</span>
+                <div class="product-rating">
+                <i style=" color: orange;" class="fa fa-star"></i>
+                <i style=" color: orange;" class="fa fa-star"></i>
+                <i style=" color: orange;" class="fa fa-star"></i>
+                <i style=" color: orange;" class="fa fa-star"></i>
+                <i style=" color: orange;" class="fa fa-star-half-o"></i>
+                    <span><i class="fas fa-star-half-alt"></i></span>
+                    <span>(350 ratings)</span>
+                </div>
+                <span>stocks:<b>{{single_product.stock}}</b></span>
+                <span class="product-price">Rs. {{single_product.price}}**</span>
+                <div class="btn-groups">
+                    {% if single_product.stock <= 0 %}
+                       <h5 style="color:red;" >out of stock </h5>
+                      {% else %}
+                  <a href="{% url 'add_cart' single_product.id %}"> <button type="button" class="add-cart-btn"><i class="fa fa-shopping-cart" aria-hidden="true"></i> add to cart</button></a>
+                      {% endif %}
+                </div>
+                <p class="product-description">{{single_product.name}} {{single_product.desc }}.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card text-center">
+    <div class="card-header " style="font-size: 40px;">
+        Review and Rating
+    </div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            {% for review in review %}
+            <div class="card-body">
+                <h5 style="font-size: small;" class="card-title"><i class="fa fa-user-o" aria-hidden="true"></i>{{review.user.username}}&nbsp;&nbsp;
+                <i class="fa fa-clock-o" aria-hidden="true"></i>{{review.created_at}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <i style=" color: orange;" class="fa fa-star"></i>{{review.rate}} star rated
+                <p class="card-text">{{review.comment}}.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <form method="GET" action="/review">
+                {% csrf_token %}
+                <input type="hidden" name="prod_id" id="prod_id" value="{{single_product.id}}">
+               
+                <label style="padding-right: 70%;" for="exampleFormControlInput1" class="form-label"><b>WRITE YOUR REVIEW:</b></label>
+                <input style="width:500px;height: 50px;" type="text" class="form-control" name="comment"  placeholder="your Review">
+                    <div class="container">
+                        <div class="rating-wrapper">
+                            <label style="padding-right: 70%;" for="exampleFormControlInput1" class="form-label"><b>YOUR RATING:</b></label>
+                            <div class="center">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rate" value="5" /><label for="star5" class="full"></label>
+                                    <input type="radio" id="star4" name="rate" value="4" /><label for="star4" class="full"></label>
+                                    <input type="radio" id="star3" name="rate" value="3" /><label for="star3" class="full"></label>
+                                    <input type="radio" id="star2" name="rate" value="2" /><label for="star2" class="full"></label>
+                                    <input type="radio" id="star1" name="rate" value="1" /><label for="star1" class="full"></label>                                 
+                                </fieldset>
+                            </div>
+                    
+                            <h4 id="rating-value"></h4>
+                        </div>
+                    </div>
+                     <button class="btn btn-light  bg-success" type="submit">POST</button>
+            </form>
+        </div>
+    </div>
+</div>
+    <div class="card-footer text-muted">
+        2 days ago
+    </div>
+</div>
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
+{% endblock %}

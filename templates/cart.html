@@ -1,0 +1,543 @@
+{% extends 'base.html' %}
+{% block title %}cart{% endblock %}
+{% block content %}
+
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #e4e4e4;
+    line-height: 22px;
+}
+
+.green{
+    color: #03a685;
+}
+
+.wrapper{
+    display: flex;
+}
+
+.wrapper_content{
+    width: 50%;
+    height: auto;
+    padding: 15px;
+    margin: 50px 0;
+    position: relative;
+    margin-left: 50px;
+}
+
+.wrapper_amount{
+    width: 50%;
+    height: auto;
+    padding: 15px;
+    margin: 50px 0;
+    position: relative;
+    margin-right: 50px;
+}
+
+.header_title{
+    display: flex;
+    justify-content: space-between;
+    width: 560px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.product_wrap,.price_details{
+    width: 560px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.product_info{
+    display: flex;
+    align-items: center;
+}
+
+.product_data{
+    margin: 0 10px;
+}
+
+.description{
+    margin-bottom: 15px;
+}
+.product_img img{
+    display: block;
+}
+
+.main_header{
+    font-weight: 700;
+}
+
+.sub_header{
+    color: pink;
+}
+
+.product_btns{
+    display: flex;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e4e4e4;
+    color: #aca9a9;
+}
+
+.product_btns > div{
+    padding : 5px 15px;
+    cursor: pointer;
+    
+   
+}
+
+.product_btns > div:hover{
+    background-color: #efefef;
+    border-radius: 3px ;
+    color: black;
+    font-weight: 700;
+}
+
+.remove{
+    border-right: 1px solid #e4e4e4;
+    width: 40%;
+    
+}
+
+.whishlist{
+    width: 60%;
+}
+
+.qty , .price{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.qty  > div {
+    background-color: #e4e4e4;
+    margin-right: 10px;
+    padding: 5px 20px;
+    font-weight: 700;
+    border-radius: 3px;
+    padding-right: 25px;
+    position: relative;
+    cursor: pointer;
+}
+
+.qty  > div::before{
+    content: "";
+    top:13px;
+    right: 8px;
+    position: absolute;
+    border: 5px solid;
+    border-color: #000 transparent transparent transparent;
+}
+
+.current_price{
+    font-weight: 700;
+    margin-right: 10px;
+}
+
+.normal_price{
+    color: #adadad;
+    margin-right: 10px;
+    text-decoration: line-through;
+}
+
+.discount{
+    color: #f16565;
+}
+
+.wrapper_amount{
+    width: 50%;
+    
+}
+
+.price_details .item,.total,.coupon{
+    display: flex;
+    justify-content: space-between;
+}
+
+.price_details .item{
+    margin-bottom: 10px;
+}
+
+.price_details .coupon{
+    margin-top: 20px;
+}
+
+.price_details .total{
+    padding-top: 10px;
+    border-top: 1px solid #e4e4e4 ;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.price_details .coupon a{
+    color: #ff3f6c;
+    background-color: #efefef;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.price_details .coupon a:hover{
+    font-weight: 700;
+}
+
+.slider.active{
+    display: block;
+}
+
+.slider{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+
+.slider .bg_shadow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+    opacity: 0.7;
+}
+
+.slider .select_size,.select_quantity{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+}
+
+.slider .header{
+    padding:10px 15px 0;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+}
+
+.close{
+    cursor: pointer;
+}
+
+.button{
+    background-color: #ff3f6c;
+    color: fff;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 2px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.body ul{
+    display: flex;
+    padding: 10px 15px 15px;
+}
+
+.body ul li{
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    margin-right:10px ;
+    cursor: pointer;
+}
+
+.body ul li:hover,.body ul li.active{
+    border-color: #ff3f6c;
+    
+    color: #ff3f6c;
+}
+
+.checkout{
+    padding: 10px 15px;
+    background-color: #ff3f6c;
+    width: 560px;
+    margin: 10px auto;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.checkout_btn{
+    color: #fff;
+    width: 100%;
+    display: block;
+}
+
+.cart_navigation{
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart_logo{
+    padding: 10px;
+    margin: 1px 10px;
+    margin-right: 110px;
+}
+
+.cart_logo i{
+    font-size: 50px;
+   color: black;
+}
+
+.middle_content{
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin: auto;
+    display: flex;
+}
+
+.bag{
+    color: #20BD99;
+   
+}
+
+.secure{
+    display: flex;
+    margin: auto 0;
+    font-weight: 700;
+    margin-right: 10px;
+}
+
+.secure i{
+    font-size: 35px;
+    color: #20BD99;
+}
+
+.secure p{
+    margin: auto 5px;
+}
+
+@media screen and (max-width:1100px) {
+    .wrapper{
+        flex-direction: column;
+    }
+
+    .wrapper_amount{
+        margin: -20px 50px;
+    }
+
+    .slider{
+        width: 173%;
+    }
+    
+    .bag{
+        display: none;
+    }
+
+    .payment{
+        display: none;
+    }
+
+    .address{
+        display: none;
+    }
+    
+    
+}
+icon-shape {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.icon-sm {
+    width: 2rem;
+    height: 2rem;
+    
+}
+</style>
+
+<div class="cart_navigation">
+    <div class="cart_logo">
+        <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+    </div>
+    <div class="middle_content">
+        <div class="bag">CART ----</div>
+
+        <div class="address">ADDRESS ----</div>
+
+        <div class="payment">PAYMENT</div>
+
+    </div>
+    <div class="secure">
+        <i class="fa fa-lock" aria-hidden="true"></i>
+        <p>100% secure</p>
+    </div>
+</div>
+<div class="wrapper">
+
+    <div class="wrapper_content">
+        <div class="header_title">
+            <div class="title">
+                MY SHOPPING CART :
+            </div>
+            <div class="amount">
+                <b>( {{cart_count}} ) ITEMS</b>
+            </div>
+
+        </div>
+        {% if not cart_items %}
+          <h2 style="color: rgb(44, 5, 236);">Your Shopping Cart is Empty</h2>
+          <div class="text-center">
+            <a href="{% url 'store' %}" class="btn btn-primary">Continue Shopping</a>
+          </div>
+         {% else %}
+            {% for cart_item in cart_items %}
+                <div class="product_wrap">
+                    <div class="product_info">
+                        <div class="product_img">
+                            <img src="{{ cart_item.product.img.url }}" alt="ProductImage" width="200px" height="200px">
+                        </div>
+                        <div class="product_data">
+                            <div class="description">
+                                <div class="main_header">
+                                    {{ cart_item.product.name }}
+                                </div>
+                                <div class="sub_header">
+                                    {{ cart_item.product.desc|truncatechars:70 }}
+                                </div>
+                            </div>
+                            <div class="input-group w-auto justify-content-end align-items-center">                    
+                               <a href="{% url 'remove_cart' cart_item.product.id %}"><input type="button" value="-" class="button-minus border rounded-circle  icon-shape icon-sm mx-1" ></a>
+                                <input type="text"  value="{{ cart_item.quantity }}" class="quantity-field border-0 text-center w-25">
+                              <a href="{% url 'add_cart' cart_item.product.id  %}"><input type="button" value="+" class="button-plus border rounded-circle icon-shape icon-sm " ></a>
+                            </div>
+                            <div class="price">
+                                <div class="current_price">Unit price:₹{{ cart_item.product.price}}.0**</div>
+                                <div class="current_price">Total:₹{{ cart_item.sub_total }}.0*</div>
+                                <div class="discount">15% OFF</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product_btns">
+                       <a href="{% url 'remove_cart_item' cart_item.product.id  %}">  <div class="remove">REMOVE</div></a>
+                    </div>
+                
+                </div>
+        
+            {% endfor %}
+        {% endif %} 
+        <div class="slider">
+            <div class="bg_shadow"></div>
+            <div class="select_size">
+                <div class="header">
+                    <div class="slider_title">Select Size</div>
+                    <div class="close">X</div>
+                </div>
+                <div class="body">
+                    <ul>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li class="active">9</li>
+                        <li>10</li>
+                    </ul>
+                </div>
+                <div class="footer">
+                    <div class="button">DONE</div>
+                </div>
+            </div>
+            <div class="select_quantity">
+                <div class="header">
+                    <div class="slider_title">Select Quantity</div>
+                    <div class="close">X</div>
+                </div>
+                <div class="body">
+                    <ul>
+                        <li class="active">1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                        <li>9</li>
+                        <li>10</li>
+                    </ul>
+                </div>
+                <div class="footer">
+                    <div class="button">DONE</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="wrapper_amount">
+        <div class="header_title">
+            <div class="title">
+                TOTAL PRICE DETAILS:
+            </div>
+            <div class="amount">
+                <b>₹ {{total}}.0**</b>
+            </div>
+        </div>
+        <div class="price_details">
+            <div class="item">
+                <p>Order Total :</p>
+                <p>₹{{total}}.0*</p>
+            </div>
+            <div class="item">
+                <p>Tax(2%) :</p>
+                <p>₹{{tax}}</p>
+            </div>
+            <div class="item">
+                <p>Delivery Charges :</p>
+                <p><span style="text-decoration: line-through;"></span>₹0 <span class="green">FREE</span></p>
+            </div>
+            <div class="total">
+                <p>Total :</p>
+                <p>₹{{grand_total}}.0*</p>
+            </div>
+        </div>
+        <div class="checkout">
+            {% if user.is_authenticated %}
+            <a  href="{% url 'place_order' %}" role="button" class="checkout_btn">Place Order</a>
+            {% else %}
+            <a href="{% url 'login' %}" role="button" class="checkout_btn">Login to Place Order</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+{% endblock %}
